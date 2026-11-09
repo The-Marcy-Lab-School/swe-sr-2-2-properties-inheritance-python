@@ -1,0 +1,32 @@
+name: Response
+
+on:
+  push:
+  workflow_dispatch:
+
+# The README tells students this check counts words, so the check has to exist.
+# It never fails the job: a student pushing a draft should not see a red X.
+jobs:
+  wordcount:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count what has been written
+        run: |
+          placeholders=$(grep -c "\[Write your response here\]" short_response.md || true)
+          words=$(grep -v "^- \[ \]" short_response.md | wc -w | tr -d ' ')
+          {
+            echo "### Short response"
+            echo ""
+            echo "| | |"
+            echo "| --- | --- |"
+            echo "| Words written | $words |"
+            echo "| Prompts still untouched | $placeholders |"
+            echo ""
+            if [ "$placeholders" -gt 0 ]; then
+              echo "Some prompts still hold \`[Write your response here]\`."
+            else
+              echo "Every prompt has a response. Your instructor reads it on your pull request."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
