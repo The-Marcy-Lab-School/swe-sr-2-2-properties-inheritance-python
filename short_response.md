@@ -105,3 +105,57 @@ test written twice, and the sentence is how you find that out.
 
 [Write your response here]
 
+## Question 4
+
+Python finds an attribute by looking in a fixed order: the instance first, then
+its class, then the parent class, and it stops at the first place it finds the
+name. That search is the whole mechanism behind a subclass replacing a parent's
+method.
+
+```py
+class Bike:
+    BASE_RATE = 3.00
+
+    def __init__(self, serial):
+        self.serial = serial
+
+    def hourly_rate(self):
+        return Bike.BASE_RATE
+
+
+class ElectricBike(Bike):
+    BASE_RATE = 7.50
+
+    def __init__(self, serial, battery_range):
+        super().__init__(serial)
+        self.battery_range = battery_range
+
+
+electric = ElectricBike("E9", 24)
+```
+
+For each of these four lines, say **where Python found the name** — name each
+place it looked, in order, and the place it stopped.
+
+```py
+electric.serial          # Line 1
+electric.battery_range   # Line 2
+electric.BASE_RATE       # Line 3
+electric.kickstand       # Line 4
+```
+
+Then the real question. This returns `3.0`:
+
+```py
+electric.hourly_rate()
+```
+
+`ElectricBike` sets `BASE_RATE` to `7.50`, and Line 3 shows that
+`electric.BASE_RATE` is `7.50`. Explain why the method disagrees. Name the one
+word in `hourly_rate` that causes it, and say what to write instead so an
+electric bike charges its own rate.
+
+### Your Response
+
+[Write your response here]
+
