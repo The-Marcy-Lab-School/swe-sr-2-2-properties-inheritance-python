@@ -140,7 +140,7 @@ class ElectricBike(Bike):
         self.battery_range = battery_range
 
 
-electric = ElectricBike("E9", 24)
+electric = ElectricBike("E9", battery_range=24)
 ```
 
 For each of these four lines, say **where Python found the name** — name each
