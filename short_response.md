@@ -94,12 +94,19 @@ run them, then paste them here.
    `pytest.raises(ValueError)`.
 2. A test that proves the stored value is unchanged after that refusal.
 
-Then, under each test, write one sentence saying **what that test would catch**
-— the specific broken version of the setter that passes the other test and
-fails this one.
+Then answer two things.
 
-The second part is the question. Two tests that cannot fail differently are one
-test written twice, and the sentence is how you find that out.
+1. **Name the broken setter your second test catches.** Write the few lines of
+   it. It has to be one that **passes** the first test and **fails** the second,
+   so the second test is earning its place.
+2. **Now try the reverse.** Look for a broken setter that passes the *second*
+   test and fails the *first*. Report what you find, and say what it tells you
+   about these two tests.
+
+The second part is the question, and the answer may not be the one you expect.
+Two tests that cannot fail differently are one test written twice, and this is
+how you find that out. Say what you actually find — including if what you find
+is that there is nothing there.
 
 ### Your Response
 
