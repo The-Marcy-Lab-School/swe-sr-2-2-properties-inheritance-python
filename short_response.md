@@ -66,58 +66,6 @@ write again.
 
 ## Question 3
 
-This question asks you to **write test code**, not prose. You will do the same
-thing in the project, where requirement 9 asks you to prove a refusal.
-
-Here is a validating setter. Assume it works.
-
-```py
-class Station:
-    def __init__(self, name, capacity):
-        self.name = name
-        self.capacity = capacity
-
-    @property
-    def capacity(self):
-        return self._capacity
-
-    @capacity.setter
-    def capacity(self, value):
-        if value < 1:
-            raise ValueError("A station needs at least one dock.")
-        self._capacity = value
-```
-
-Write **two** tests for it, and run them before you paste them here. In your
-code repository for this assignment, paste the `Station` class above into
-`src/playground.py`. Then write your tests in a new file,
-`my_tests/test_capacity_refusal.py`, that begins with these two lines:
-
-```py
-import pytest
-from playground import Station
-```
-
-Run your tests with `pytest my_tests/test_capacity_refusal.py`, and paste them
-here once both pass.
-
-1. A test that proves the setter refuses a capacity below 1. Use
-   `pytest.raises(ValueError)`.
-2. A test that proves the stored value is unchanged after that refusal.
-
-Then, under each test, write one sentence saying **what that test would catch**
-— the specific broken version of the setter that passes the other test and
-fails this one.
-
-The second part is the question. Two tests that cannot fail differently are one
-test written twice, and the sentence is how you find that out.
-
-### Your Response
-
-[Write your response here]
-
-## Question 4
-
 Python finds an attribute by looking in a fixed order: the instance first, then
 its class, then the parent class, then `object`, and it stops at the first
 place it finds the name. That search is the whole mechanism behind a subclass replacing a parent's
@@ -143,18 +91,8 @@ class ElectricBike(Bike):
 electric = ElectricBike("E9", battery_range=24)
 ```
 
-For each of these four lines, say **where Python found the name** — name each
-place it looked, in order, and the place it stopped.
-
-```py
-electric.serial          # Line 1
-electric.battery_range   # Line 2
-electric.BASE_RATE       # Line 3
-electric.kickstand       # Line 4
-```
-
-Then the real question. A teammate wants to give the rider of `electric` one
-free ride, and runs these lines:
+A teammate wants to give the rider of `electric` one free ride, and runs these
+lines:
 
 ```py
 electric.BASE_RATE = 0
@@ -163,11 +101,10 @@ print(electric.hourly_rate())   # 3.0
 ```
 
 The first `print()` shows `0`, but the second still shows `3.0`. For each
-`print()`, say where Python finds `BASE_RATE`, and explain why the free ride did
-not happen. Then say what the teammate would have to write to change the rate
+`print()`, say where Python finds `BASE_RATE`: name each place it looks, in
+order, and the place it stops. Then explain why the free ride did not happen. Then say what the teammate would have to write to change the rate
 that `hourly_rate()` returns, and what that line would do to every other bike.
 
 ### Your Response
 
 [Write your response here]
-
