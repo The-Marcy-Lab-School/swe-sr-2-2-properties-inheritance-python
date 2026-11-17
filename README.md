@@ -17,8 +17,10 @@ Paste this if you want that kind of help:
 
 > You are acting as a tutor. Quiz me on which attributes deserve a rule and
 > which do not, on what a single leading underscore does and does not prevent,
-> and on the order Python searches when it looks up an attribute, until I can
-> explain all of it without looking anything up. Tell me when my reasoning is
+> on when one class should inherit from another ("is a") and when it should
+> hold the other as an attribute ("has a"), and on the order Python searches
+> when it looks up an attribute, until I can explain all of it without looking
+> anything up. Tell me when my reasoning is
 > wrong or imprecise. Do not write or rewrite any part of my response for me.
 
 A response you did not write is worth nothing to you in an interview, which is

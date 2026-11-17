@@ -33,7 +33,8 @@ would go wrong, or what would not.
 
 Then answer this: for whichever ones you made non-public, what has actually
 changed? Another programmer can still write `member._bikes_out = 99` and Python
-will let them. So what did the underscore buy, and what did it not?
+will let them. So what does the underscore accomplish, and what does it not
+prevent?
 
 ### Your Response
 
@@ -50,14 +51,14 @@ class CargoBike(Bike):        # a bike with a crate on the front
 class Invoice(Member):        # a month's charges for one member
 ```
 
-For each one, say whether inheritance is right, and if it is not, what the class
-should hold instead. Use the phrases **"is a"** and **"has a"** in your answer
-and make them do real work — `Dock` is a dock, not a station, so what is the
-relationship?
+For each one, say whether inheritance is right. Use the phrases **"is a"** and
+**"has a"** to explain each answer: ask whether the new class is a kind of the
+class in parentheses, or whether one of the two classes should hold the other.
+Where inheritance is wrong, name the class that should hold the other.
 
-Then answer this: one of the three is genuinely a case for inheritance. Say
-which, and name one thing it would get from its parent for free that it would
-otherwise have to write again.
+Then, for the one proposal that is a case for inheritance, name one method or
+attribute it would receive from its parent that it would otherwise have to
+write again.
 
 ### Your Response
 
@@ -87,8 +88,18 @@ class Station:
         self._capacity = value
 ```
 
-Write **two** tests for it. Use `src/playground.py` in the code repo to actually
-run them, then paste them here.
+Write **two** tests for it, and run them before you paste them here. In your
+code repository for this assignment, paste the `Station` class above into
+`src/playground.py`. Then write your tests in a new file,
+`my_tests/test_capacity_refusal.py`, that begins with these two lines:
+
+```py
+import pytest
+from playground import Station
+```
+
+Run your tests with `pytest my_tests/test_capacity_refusal.py`, and paste them
+here once both pass.
 
 1. A test that proves the setter refuses a capacity below 1. Use
    `pytest.raises(ValueError)`.
@@ -108,8 +119,8 @@ test written twice, and the sentence is how you find that out.
 ## Question 4
 
 Python finds an attribute by looking in a fixed order: the instance first, then
-its class, then the parent class, and it stops at the first place it finds the
-name. That search is the whole mechanism behind a subclass replacing a parent's
+its class, then the parent class, then `object`, and it stops at the first
+place it finds the name. That search is the whole mechanism behind a subclass replacing a parent's
 method.
 
 ```py
@@ -124,8 +135,6 @@ class Bike:
 
 
 class ElectricBike(Bike):
-    BASE_RATE = 7.50
-
     def __init__(self, serial, battery_range):
         super().__init__(serial)
         self.battery_range = battery_range
@@ -144,16 +153,19 @@ electric.BASE_RATE       # Line 3
 electric.kickstand       # Line 4
 ```
 
-Then the real question. This returns `3.0`:
+Then the real question. A teammate wants to give the rider of `electric` one
+free ride, and runs these lines:
 
 ```py
-electric.hourly_rate()
+electric.BASE_RATE = 0
+print(electric.BASE_RATE)       # 0
+print(electric.hourly_rate())   # 3.0
 ```
 
-`ElectricBike` sets `BASE_RATE` to `7.50`, and Line 3 shows that
-`electric.BASE_RATE` is `7.50`. Explain why the method disagrees. Name the one
-word in `hourly_rate` that causes it, and say what to write instead so an
-electric bike charges its own rate.
+The first `print()` shows `0`, but the second still shows `3.0`. For each
+`print()`, say where Python finds `BASE_RATE`, and explain why the free ride did
+not happen. Then say what the teammate would have to write to change the rate
+that `hourly_rate()` returns, and what that line would do to every other bike.
 
 ### Your Response
 
